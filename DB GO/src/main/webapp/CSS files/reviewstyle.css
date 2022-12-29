@@ -1,0 +1,190 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+}
+body{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  background-color: #DFD3C3;
+}
+.x-axis-flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.y-axis-flex{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.top-header{
+  width: 100%;
+  background-color: #282A3A;
+  padding: 10px;
+  text-align: center;
+}
+.top-heading-icon{
+  width: 70px;
+  height: 70px;
+  margin: 10px;
+  background-image: url("dbicon.png");
+  background-size: 100% 100%;
+  border-radius: 50%;
+  background-color: white;
+}
+.top-heading-text{
+  color: white;
+}
+.middle-body{
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.common-main-section{
+  height: 600px;
+  background-color: #282A3A;
+  max-width: 700px;
+  width: 95%;
+  margin: 10px;
+}
+/* Review writing section styling starts here  */
+.user-review-writing-section{
+  justify-content: space-around;
+}
+.review-heading{
+  font-size: 30px;
+  color: white;
+}
+.review-body{
+  width: 90%;
+  background-color: white;
+  height: 500px;
+  justify-content: space-around;
+}
+.stars-div{
+  width: 240px;
+  justify-content: space-between;
+}
+.stars-div > h2{
+  font-size: 30px;
+}
+.star-option-tag{
+  font-size: 20px;
+  background-color: #282A3A;
+  color: white;
+  padding-left: 10px;
+}
+.textarea-tag{
+  width: 80%;
+  height: 60%;
+  font-size: 20px;
+}
+.style-button{
+  padding: 10px 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background-color: #282A3A;
+  color: white;
+  transition: 1s;
+}
+.style-button:active{
+  transform: scale(0.9);
+}
+/* Review writing section styling ends here  */
+
+/* Review display section styling starts here  */
+.full-review-section{
+  justify-content: space-around;
+}
+.review-page{
+  width: 90%;
+  background-color: white;
+  height: 500px;
+  overflow: scroll;
+  padding: 0;
+}
+.user-review-box{
+  list-style-type: none;
+  width: 100%;
+  border-bottom: 1px solid black;
+  padding: 10px;
+  justify-content: space-between;
+}
+.user-reveiew-head-part{
+  width: 100%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.user-profile-image-name{
+  padding: 10px;
+}
+.review-stars{
+  padding: 10px;
+  width: 145px;
+}
+.user-review-wrapper{
+  text-align: left;
+  width: 100%;
+  padding: 10px;
+}
+.user-review-para{
+  font-size: 20px;
+  padding: 10px;
+}
+.bi-star-fill{
+  color: grey;
+}
+.user-name{
+  font-size: 25px;
+  padding: 10px;
+  font-weight: 600;
+}
+.bi-person-circle{
+  background-color: white;
+  color: #282A3A;
+  font-size: 50px;
+}
+/* Review display section styling ends here  */
+
+.go-button{
+  margin: 10px;
+}
+.bottom-end-section{
+  background-color: #282A3A;
+  color: white;
+  width: 100%;
+}
+.social-media{
+  margin: 5px;
+}
+.social-media > li{
+  color: white;
+  list-style-type: none;
+  padding: 10px;
+}
+i{
+  color: white;
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 1240px){
+  body{
+    height: auto;
+  }
+}
+@media only screen and (max-height: 700px){
+  .common-main-section{
+    height: 400px;
+  }
+  .review-page{
+    height: 300px;
+  }
+  .review-body{
+    height: 300px;
+  }
+}

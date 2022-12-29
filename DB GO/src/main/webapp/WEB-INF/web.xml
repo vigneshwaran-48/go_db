@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>DB GO</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+	  <servlet-name>MainPageServlet</servlet-name>
+	  <servlet-class>com.servletpack.MainPageServlet</servlet-class>
+  </servlet>
+  <servlet>
+	  <servlet-name>Database</servlet-name>
+	  <servlet-class>com.servletpack.DatabaseServlet</servlet-class>
+  </servlet>
+  <servlet>
+	  <servlet-name>SaveUser</servlet-name>
+	  <servlet-class>com.servletpack.SaveDetailsServlet</servlet-class>
+  </servlet>
+  <servlet>
+	  <servlet-name>SearchData</servlet-name>
+	  <servlet-class>com.servletpack.RetrieveDataServlet</servlet-class>
+  </servlet>
+  <servlet>
+	  <servlet-name>CodeArea</servlet-name>
+	  <servlet-class>com.servletpack.CodeAreaServlet</servlet-class>
+  </servlet>
+  <servlet>
+	  <servlet-name>SignIn</servlet-name>
+	  <servlet-class>com.servletpack.SignInServlet</servlet-class>
+  </servlet>
+  <servlet>
+	  <servlet-name>VerifySignIn</servlet-name>
+	  <servlet-class>com.servletpack.VerifyUserServlet</servlet-class>
+  </servlet>
+  <servlet>
+	  <servlet-name>Review</servlet-name>
+	  <servlet-class>com.servletpack.ReviewServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+	  <servlet-name>MainPageServlet</servlet-name>
+	  <url-pattern>/mainpage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	  <servlet-name>Database</servlet-name>
+	  <url-pattern>/data</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	  <servlet-name>SaveUser</servlet-name>
+	  <url-pattern>/saveuser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	  <servlet-name>SearchData</servlet-name>
+	  <url-pattern>/displaycontent</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	  <servlet-name>CodeArea</servlet-name>
+	  <url-pattern>/codearea</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	  <servlet-name>SignIn</servlet-name>
+	  <url-pattern>/signin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	  <servlet-name>VerifySignIn</servlet-name>
+	  <url-pattern>/verifysignin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	  <servlet-name>Review</servlet-name>
+	  <url-pattern>/review</url-pattern>
+  </servlet-mapping>
+ 
+</web-app>

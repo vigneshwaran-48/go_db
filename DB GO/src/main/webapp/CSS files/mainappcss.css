@@ -1,0 +1,74 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0px;
+}
+body{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  background-color: #DFD3C3;
+}
+.x-axis-flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.top-header{
+  width: 100%;
+  background-color: #282A3A;
+  padding: 10px;
+  text-align: center;
+}
+.top-heading-icon{
+  width: 70px;
+  height: 70px;
+  margin: 10px;
+  background-image: url("dbicon.png");
+  background-size: 100% 100%;
+  border-radius: 50%;
+  background-color: white;
+}
+.top-heading-text{
+  color: white;
+}
+.buttons-wrapper{
+  flex-wrap: wrap;
+}
+.button-tag{
+  border: none;
+  width: 200px;
+  height:60px;
+  font-size: 23px;
+  border-radius: 10px;
+  background-color: #282A3A;
+  color: #DFD3C3;
+  margin: 10px;
+  transition: 1s;
+}
+.button-tag:hover{
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
+}
+.button-tag:active{
+  transform: scale(0.9);
+}
+.bottom-end-section{
+  background-color: #282A3A;
+  color: white;
+  width: 100%;
+}
+.social-media{
+  margin: 5px;
+}
+.social-media > li{
+  color: white;
+  list-style-type: none;
+  padding: 10px;
+}
+i{
+  color: white;
+  font-size: 20px;
+}

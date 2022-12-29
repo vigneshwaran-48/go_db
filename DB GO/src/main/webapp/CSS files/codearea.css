@@ -1,0 +1,116 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+}
+body{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  background-color: #DFD3C3;
+}
+.x-axis-flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.y-axis-flex{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.top-header{
+  width: 100%;
+  background-color: #282A3A;
+  padding: 10px;
+  text-align: center;
+}
+.top-heading-icon{
+  width: 70px;
+  height: 70px;
+  margin: 10px;
+  background-image: url("dbicon.png");
+  background-size: 100% 100%;
+  border-radius: 50%;
+  background-color: white;
+}
+.top-heading-text{
+  color: white;
+}
+.create-table-form-section{
+  width: 100%;
+  border: 1px solid black;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.main-section-inner-div{
+  min-width: 290px;
+  width: 30%;
+  height: 500px;
+  margin: 10px;
+}
+.code-templates{
+  background-color: white;
+  justify-content: space-between;
+}
+.code-area > textarea{
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+}
+.output-area{
+  max-width: 570px;
+  background-color: #282A3A;
+  color: white;
+  overflow: scroll;
+}
+.command-prompt-style{
+	padding: 10px;
+	font-size: 18px;
+	text-align: left;
+}
+.template-button{
+  border: none;
+  font-size: 20px;
+  background-color: #282A3A;
+  color: white;
+  border-radius: 10px;
+  padding: 7px;
+  transition: 1s;
+  margin: 5px;
+}
+.template-button:active{
+  transform: scale(0.8);
+}
+.bottom-end-section{
+  background-color: #282A3A;
+  color: white;
+  width: 100%;
+}
+.social-media{
+  margin: 5px;
+}
+.social-media > li{
+  color: white;
+  list-style-type: none;
+  padding: 10px;
+}
+i{
+  color: white;
+  font-size: 20px;
+}
+.back-button{
+	border: none;
+	padding: 10px;
+	font-size: 20px;
+	background-color: #282A3A;
+	color: white;
+	border-radius: 10px;
+	margin: 10px;
+	transition: 0.5s;
+}
+.back-button:active{
+	transform: scale(0.9);
+}

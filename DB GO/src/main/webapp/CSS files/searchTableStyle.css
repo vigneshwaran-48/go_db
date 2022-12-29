@@ -1,0 +1,158 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+}
+body{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  background-color: #DFD3C3;
+}
+.x-axis-flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.y-axis-flex{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.top-header{
+  width: 100%;
+  background-color: #282A3A;
+  padding: 10px;
+  text-align: center;
+}
+.top-heading-icon{
+  width: 70px;
+  height: 70px;
+  margin: 10px;
+  background-image: url("dbicon.png");
+  background-size: 100% 100%;
+  border-radius: 50%;
+  background-color: white;
+}
+.top-heading-text{
+  color: white;
+}
+.main-content{
+  padding: 10px;
+  width: 100%;
+  /**height: 80%;**/
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.databases-and-tables-list{
+  justify-content: space-between;
+  /**height: 600px;**/
+  min-width: 700px;
+  width: 43%;
+  flex-wrap: wrap;
+}
+.databases{
+  min-width: 350px;
+  width: 49%;
+  height: 600px;
+  border: 1px solid #282A3A;
+  background-color: white;
+  overflow: scroll;
+}
+.heading{
+  background-color: #282A3A;
+  color: white;
+  padding: 10px;
+  width: 100%;
+}
+.tables{
+  background-color: white;
+  min-width: 350px;
+  width: 49%;
+  height: 600px;
+  border: 1px solid #282A3A;
+  overflow: scroll;
+}
+.table-content{
+  margin: 10px;
+  min-width: 600px;
+  width: 50%;
+  background-color: white;
+  height: 600px;
+  border: 1px solid #282A3A;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+.bottom-end-section{
+  background-color: #282A3A;
+  color: white;
+  width: 100%;
+}
+.social-media{
+  margin: 5px;
+}
+.social-media > li{
+  color: white;
+  list-style-type: none;
+  padding: 10px;
+}
+i{
+  color: white;
+  font-size: 20px;
+}
+.back-button{
+	border: none;
+	padding: 10px;
+	font-size: 20px;
+	background-color: #282A3A;
+	color: white;
+	border-radius: 10px;
+	margin: 10px;
+	transition: 0.5s;
+}
+.back-button:active{
+	transform: scale(0.9);
+}
+.content-buttons{
+  width: 100%;
+  height: 30px;
+  border: 1px solid #282A3A;
+  transition: 0.5s;
+}
+.content-buttons:hover {
+  background-color: #495579;
+  color: white;
+}
+
+
+
+
+@media only screen and (max-width:690px){
+	.databases-and-tables-list{
+		min-width: 350px;
+	}
+	.databases{
+		margin-bottom: 10px;
+	}
+	.table-content{
+		min-width: 350px;
+	}
+}
+@media only screen and (max-width:350px){
+	.databases-and-tables-list{
+		min-width: 270px;
+	}
+	.table-content{
+		min-width: 270px;
+	}
+	.databases, .tables{
+		min-width: 270px;
+	}
+}
+
+
+
+
+

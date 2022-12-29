@@ -1,0 +1,97 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+}
+body{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  background-color: #DFD3C3;
+}
+.x-axis-flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.y-axis-flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.top-header{
+  width: 100%;
+  background-color: #282A3A;
+  padding: 10px;
+  text-align: center;
+}
+.top-heading-icon{
+  width: 70px;
+  height: 70px;
+  margin: 10px;
+  background-image: url("dbicon.png");
+  background-size: 100% 100%;
+  border-radius: 50%;
+  background-color: white;
+}
+.top-heading-text{
+  color: white;
+}
+.form-tag{
+  max-width: 500px;
+  width: 95%;
+  background-color: #282A3A;
+  padding: 10px;
+  border-radius: 10px;
+}
+.input-wrapper{
+  color: white;
+  padding: 10px;
+  width: 100%;
+  justify-content: space-between;
+}
+label{
+  font-size: 20px;
+}
+input{
+  max-width: 177px;
+  font-size: 20px;
+  width: 40%;
+}
+.go-button{
+  border: none;
+  padding: 5px;
+  width: 80px;
+  font-size: 20px;
+  background-color: #DFD3C3;
+  color: #282A3A;
+  border-radius: 10px;
+  margin: 10px;
+  transition: 0.5s;
+}
+select{
+	font-size: 20px;
+}
+.go-button:active {
+  transform: scale(0.9);
+}
+.bottom-end-section{
+  background-color: #282A3A;
+  color: white;
+  width: 100%;
+}
+.social-media{
+  margin: 5px;
+}
+.social-media > li{
+  color: white;
+  list-style-type: none;
+  padding: 10px;
+}
+i{
+  color: white;
+  font-size: 20px;
+}
