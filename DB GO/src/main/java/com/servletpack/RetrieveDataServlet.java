@@ -1,25 +1,21 @@
 package com.servletpack;
 
-import java.io.*;
-import java.io.File;
+import java.io.*; 
 import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dboperations.ConnectToDB;
-import com.dboperations.FindCookiePosition;
 import com.dboperations.RetrieveDBList;
 import com.dboperations.RetrieveData;
 import com.dboperations.RetrieveTableList;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Servlet implementation class RetrieveDataServlet
@@ -31,43 +27,51 @@ public class RetrieveDataServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Connection c = new ConnectToDB().getInstantConnection();
-		RetrieveDBList rdb = new RetrieveDBList();
-		ArrayList<String> dbList = rdb.getDBList(c);
 		
-		String clickedDBName = request.getParameter("UserClickedDB");
-		String clickedTableName = request.getParameter("UserClickedTable");
-		
-		if(clickedTableName != null) {
+		HttpSession session = request.getSession();
+	
+		if(session.getAttribute("userDbDetails") != null) {
 			
-			RetrieveData rtd = new RetrieveData();
-			String temp[][] = null;
+			Connection c = new ConnectToDB().getInstantConnection((String) session.getAttribute("userDbDetails"));
+			RetrieveDBList rdb = new RetrieveDBList();
+			ArrayList<String> dbList = rdb.getDBList(c);
 			
-			Cookie[] tempCookie = request.getCookies();
-			FindCookiePosition fcp = new FindCookiePosition();
-			int resultStatus = fcp.getCookiePosition("dbName", tempCookie);
+			String clickedDBName = request.getParameter("UserClickedDB");
+			String clickedTableName = request.getParameter("UserClickedTable");
 			
-			if(resultStatus != 20) {
-				temp = rtd.getTableData(c, tempCookie[resultStatus].getValue(), clickedTableName);
-				clickedDBName = tempCookie[resultStatus].getValue();
+			if(clickedTableName != null) {
+				
+				RetrieveData rtd = new RetrieveData();
+				String temp[][] = null;
+				
+				if(session.getAttribute("dbName") != null) {
+					
+					temp = rtd.getTableData(c, (String) session.getAttribute("dbName"), clickedTableName);
+					clickedDBName = (String) session.getAttribute("dbName");
+				}
+
+				request.setAttribute("userTableData", temp);
+				
 			}
 			
-			request.setAttribute("userTableData", temp);
+			if(clickedDBName != null) {
+				RetrieveTableList rtl = new RetrieveTableList();
+				ArrayList<String> tablesList = rtl.getTablesList(c, clickedDBName);
+				request.setAttribute("userTableList", tablesList);
+				session.setAttribute("dbName", clickedDBName);
+
+			}
 			
+			
+			request.setAttribute("userDBList", dbList);
+			RequestDispatcher rd = request.getRequestDispatcher("JSP files/searchTable.jsp");
+			rd.forward(request, response);
 		}
-		
-		if(clickedDBName != null) {
-			RetrieveTableList rtl = new RetrieveTableList();
-			ArrayList<String> tablesList = rtl.getTablesList(c, clickedDBName);
-			request.setAttribute("userTableList", tablesList);
-			Cookie cook = new Cookie("dbName", clickedDBName);
-			response.addCookie(cook);
+		else {
+			request.setAttribute("goTo", "userDB.html");
+			RequestDispatcher rd = request.getRequestDispatcher("JSP files/cookiestatus.jsp");
+			rd.forward(request, response);
 		}
-		
-		
-		request.setAttribute("userDBList", dbList);
-		RequestDispatcher rd = request.getRequestDispatcher("JSP files/searchTable.jsp");
-		rd.forward(request, response);
 	}
 
 	/**

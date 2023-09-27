@@ -1,20 +1,18 @@
 package com.servletpack;
 
-import java.io.IOException;
-import java.net.URLEncoder;
+import java.io.IOException; 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dboperations.ConnectToDB;
-import com.dboperations.FindCookiePosition;
 import com.dboperations.RunCode;
 
 /**
@@ -28,56 +26,72 @@ public class CodeAreaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String code = request.getParameter("userCode");
-		Connection c = new ConnectToDB().getInstantConnection();
-		Cookie[] tempCookie = request.getCookies();
-		
-		if(code != null) {
-			if(code.startsWith("use")) {
-				String tempCode = code.replace(" ", "34");
-				tempCode = tempCode.replace(";", "7");
-				Cookie cook = new Cookie("useCommand", tempCode);
-				response.addCookie(cook);
-			}
-			RunCode rc = new RunCode();
-			ArrayList tempArray = null;
-			FindCookiePosition fcp = new FindCookiePosition();
-			int resultStatus = fcp.getCookiePosition("useCommand", tempCookie);
+		HttpSession session = request.getSession();
+
+		if(session.getAttribute("userDbDetails") != null) {
 			
-			if(resultStatus != 20) {
-				String tempCode = tempCookie[resultStatus].getValue().replace("34", " ");
-				tempCode = tempCode.replace("7", ";");
-				tempArray = rc.runCode(code, c, tempCode);
-			}
-			else {
-				tempArray = rc.runCode(code, c, "");
-			}
-			Object[] temp = tempArray.toArray();
-			try {
-				if(temp.length == 2) {
-					
-					ArrayList array = rc.convertResultSet((ResultSet) tempArray.get(0));
-					ArrayList<ArrayList<String>> resultSetData = (ArrayList<ArrayList<String>>) array.get(0);
-					
-					request.setAttribute("codeResultArray", array.get(0));
-					request.setAttribute("rowsInSet", (int) array.get(1));
-				}
-				else if(temp.length == 3) {
-					request.setAttribute("error", (String) temp[0]);
-				}
-				else if (temp.length == 1){
-					request.setAttribute("rowsAffected", (int) temp[0]);
+			boolean isValidStatement = true;
+			Connection c = new ConnectToDB().getInstantConnection((String) session.getAttribute("userDbDetails"));
+			
+			if(code != null) {	
+				
+				RunCode rc = new RunCode();
+				ArrayList tempArray = null;
+				
+				if(session.getAttribute("useCommand") != null) {
+					tempArray = rc.runCode(code, c, (String) session.getAttribute("useCommand"));
 				}
 				else {
-					System.out.println("No way!...");
+					tempArray = rc.runCode(code, c, "");
+				}
+				Object[] temp = tempArray.toArray();
+				try {
+					if(temp.length == 2) {
+						
+						ArrayList array = rc.convertResultSet((ResultSet) tempArray.get(0));
+						ArrayList<ArrayList<String>> resultSetData = (ArrayList<ArrayList<String>>) array.get(0);
+						
+						request.setAttribute("codeResultArray", array.get(0));
+						request.setAttribute("rowsInSet", (int) array.get(1));
+						
+					}
+					else if(temp.length == 3) {
+						request.setAttribute("error", (String) temp[0]);
+						isValidStatement = false;
+					}
+					else if (temp.length == 1){
+						request.setAttribute("rowsAffected", (int) temp[0]);
+						
+						if(code.toLowerCase().startsWith("use")) {
+							session.setAttribute("useCommand", code);
+
+						}
+					}
+					else {
+						System.out.println("No way!...");
+					}
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
+				if(isValidStatement) {
+					//This code is for storing the use command in cookie only if its a correct statement
+					if(code.toLowerCase().startsWith("use")) {
+						session.setAttribute("useCommand", code);
+					}
 				}
 			}
-			catch(Exception e) {
-				e.printStackTrace();
-			}
+			
+			
+			RequestDispatcher rd = request.getRequestDispatcher("JSP files/codearea.jsp");
+			rd.forward(request, response);
+		}
+		else {
+			request.setAttribute("goTo", "userDB.html");
+			RequestDispatcher rd = request.getRequestDispatcher("JSP files/cookiestatus.jsp");
+			rd.forward(request, response);
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("JSP files/codearea.jsp");
-		rd.forward(request, response);
 	}
 
 	/**

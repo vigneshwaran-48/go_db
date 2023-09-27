@@ -9,6 +9,7 @@ public class VerifyUserClass {
 
 	public boolean isLegalUser(String userName, String userPassword) {
 		
+		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/", "vicky", "vi99g@NESH");

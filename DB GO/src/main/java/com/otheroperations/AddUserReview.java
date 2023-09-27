@@ -2,6 +2,7 @@ package com.otheroperations;
 
 import java.sql.*;
 
+
 public class AddUserReview {
 
 	public void addReview(String userName,String userReview, int userStarCount) {
@@ -18,5 +19,7 @@ public class AddUserReview {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
+		
 }

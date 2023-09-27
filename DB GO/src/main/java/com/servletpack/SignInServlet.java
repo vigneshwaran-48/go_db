@@ -1,6 +1,6 @@
 package com.servletpack;
 
-import java.io.IOException;
+import java.io.IOException; 
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,8 +8,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.dboperations.FindCookiePosition;
+import com.otheroperations.CookieOperations;
+import com.otheroperations.FindCookiePosition;
 import com.otheroperations.SaveSignInDetails;
 import com.otheroperations.UserNameAvailable;
 
@@ -23,10 +25,12 @@ public class SignInServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		FindCookiePosition fcp = new FindCookiePosition();
-		Cookie[] cooks = request.getCookies();
-		int position = fcp.getCookiePosition("userName", cooks);
+		
+		CookieOperations co = new CookieOperations();
 		String userName = request.getParameter("userName");
+		Cookie[] cooks = request.getCookies();
+		FindCookiePosition fcp = new FindCookiePosition();
+		int position = fcp.getCookiePosition("userName", cooks);
 		
 		if(position != 20) {
 			RequestDispatcher rd = request.getRequestDispatcher("review");
@@ -42,13 +46,13 @@ public class SignInServlet extends HttpServlet {
 				
 				String userPass = request.getParameter("userPassword");
 				
-				Cookie cook = new Cookie("userName", userName);
-				cook.setMaxAge(86400);
-				response.addCookie(cook);
+				Cookie c = new Cookie("userName", co.encodeCookie(userName));
+				c.setMaxAge(86400);
+				response.addCookie(c);
 				
-				Cookie passCook = new Cookie("userPassword", userPass);
-				passCook.setMaxAge(86400);
-				response.addCookie(passCook);
+				Cookie c1 = new Cookie("userPassword", co.encodeCookie(userPass));
+				c1.setMaxAge(86400);
+				response.addCookie(c1);
 				
 				SaveSignInDetails ssd = new SaveSignInDetails();
 				ssd.saveSignInDetails(userName, userPass);
@@ -60,6 +64,7 @@ public class SignInServlet extends HttpServlet {
 			
 		}
 		else {
+			System.out.println("Going to signin page");
 			RequestDispatcher rd = request.getRequestDispatcher("signinpage.html");
 			rd.forward(request, response);
 		}
@@ -70,6 +75,7 @@ public class SignInServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Came into doPost method");
 		doGet(request, response);
 		
 	}
